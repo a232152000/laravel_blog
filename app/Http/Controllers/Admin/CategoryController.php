@@ -10,10 +10,10 @@ class CategoryController extends CommonController
     //get admin/category 全部分類列表
     public function index()
     {
-        $category = Category::all();
-        //dd($category);
+        $category = (new Category) -> tree();
         return view('admin.category.index') -> with('data' , $category);
     }
+
 
     //post admin/category
     public function store()
