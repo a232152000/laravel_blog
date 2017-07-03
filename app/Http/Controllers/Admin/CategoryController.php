@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rules\In;
+use Validator;
 
 class CategoryController extends CommonController
 {
@@ -36,16 +38,38 @@ class CategoryController extends CommonController
         }
         return $data;
     }
-    //post admin/category
-    public function store()
-    {
-
-    }
 
     //get admin/category/create  添加分類
     public function create()
     {
+        $data = Category::where('cate_pid',0)->get();
+        return view('admin/category/add' , compact('data'));
+    }
 
+    //post admin/category  添加分類提交
+    public function store()
+    {
+        if($input = Input::except('_token')){
+            $rules = [
+                'cate_name' => 'required',
+            ];
+            $message = [
+                'cate_name.required' => '分類名稱不能為空!',
+            ];
+            $validator = Validator::make($input,$rules,$message);
+            if($validator -> passes()){
+                $re = Category::create($input);
+                if($re){
+                    return redirect('admin/category');
+                }
+                else{
+                    return back() -> with('errors','數據填充失敗，請稍後再試!');
+                }
+            }
+            else{
+                return back() -> withErrors($validator);
+            }
+        }
     }
 
     //get admin/category/{category} 顯示單個分類訊息
