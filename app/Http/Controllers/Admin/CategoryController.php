@@ -72,27 +72,50 @@ class CategoryController extends CommonController
         }
     }
 
+    //get admin/category/{category}/edit  編輯分類
+    public function edit($cate_id)
+    {
+        $field = Category::find($cate_id);
+        $data = Category::where('cate_pid',0)->get();
+        return view('admin/category/edit' , compact('field','data'));
+    }
+
+    //put admin/category/{category} 更新分類
+    public function update($cate_id)
+    {
+        $input = Input::except('_token','_method');
+        $re = Category::where('cate_id' , $cate_id) ->update($input);
+        if($re){
+            return redirect('admin/category');
+        }
+        else{
+            return back() -> with('errors','分類訊息修改失敗，請稍後再試!');
+        }
+    }
+
     //get admin/category/{category} 顯示單個分類訊息
     public function show()
     {
 
     }
 
-    //put admin/category/{category} 更新分類
-    public function update()
+    //DELETE admin/category/{category}  刪除單個分類
+    public function destroy($cate_id)
     {
-
-    }
-
-    //DELETE admin/category/create  刪除單個分類
-    public function destroy()
-    {
-
-    }
-
-    //get admin/category/{category}/edit  編輯分類
-    public function edit()
-    {
-
+        $re = Category::where('cate_id',$cate_id)->delete();
+        Category::where('cate_pid',$cate_id)->update(['cate_pid' => 0]);
+        if($re){
+            $data = [
+                'status' => 0,
+                'msg' => '分類刪除成功',
+            ];
+        }
+        else{
+            $data = [
+                'status' => 1,
+                'msg' => '分類刪除失敗，請稍後再試',
+            ];
+        }
+    return $data;
     }
 }
