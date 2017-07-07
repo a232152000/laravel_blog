@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Model\Category;
 use Illuminate\Http\Request;
 
 class ArticleController extends CommonController
@@ -15,7 +16,7 @@ class ArticleController extends CommonController
     //get admin/article/create  添加文章
     public function create()
     {
-        $data = [];
+        $data = (new Category) -> tree();
         return view('admin.article.add' , compact('data'));
     }
 }
