@@ -29,6 +29,8 @@ Route::group(['middleware' => ['web','admin.login'] , 'prefix' => 'admin' , 'nam
     Route::get('quit', 'LoginController@quit');//使用者後台離開返回登入頁面
     Route::any('pass', 'IndexController@pass');//使用者後台登入頁面的修改密碼
 
-    Route::post('cate/changeorder', 'CategoryController@changeOrder');
+    Route::post('cate/changeorder', 'CategoryController@changeOrder');//文章分類頁面更改排序
     Route::resource('category', 'CategoryController');//文章分類頁面
+
+    Route::resource('article', 'ArticleController');//文章頁面
 });
