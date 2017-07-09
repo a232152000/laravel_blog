@@ -60,10 +60,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <th><i class="require">*</i>文章縮圖:</th>
+                    <th>文章縮圖:</th>
                     <td>
                         {{--縮略圖(uploadify)加入--}}
-                        <input type="text" size="'50" name="art_thumb">
+                        <input type="text" class="lg" name="art_thumb">
                         <input id="file_upload" name="file_upload" type="file" multiple="true">
                         <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
                         <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
@@ -78,7 +78,11 @@
                                         '_token'     : '{{csrf_token()}}'
                                     },
                                     'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
-                                    'uploader' : "{{url('admin/upload')}}"
+                                    'uploader' : "{{url('admin/upload')}}",
+                                    'onUploadSuccess' : function(file, data, response) {
+                                        $('input[name=art_thumb]').val(data);
+                                        $('#art_thumb_img').attr('src','/'+data);
+                                    }
                                 });
                             });
                         </script>
@@ -88,6 +92,12 @@
                             .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
                             table.add_tab tr td span.uploadify-button-text{color: #FFF; margin:0;}
                         </style>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <img src="" alt="" id="art_thumb_img" style="max-width: 350px ; max-height: 100px">
                     </td>
                 </tr>
                 <tr>
