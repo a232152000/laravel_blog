@@ -33,4 +33,5 @@ Route::group(['middleware' => ['web','admin.login'] , 'prefix' => 'admin' , 'nam
     Route::resource('category', 'CategoryController');//文章分類頁面
 
     Route::resource('article', 'ArticleController');//文章頁面
+    Route::any('upload', 'CommonController@upload');//使用者後台登入頁面的修改密碼
 });

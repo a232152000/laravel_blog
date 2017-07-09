@@ -62,7 +62,32 @@
                 <tr>
                     <th><i class="require">*</i>文章縮圖:</th>
                     <td>
-                        <input type="text" class="lg" name="art_thumb">
+                        {{--縮略圖(uploadify)加入--}}
+                        <input type="text" size="'50" name="art_thumb">
+                        <input id="file_upload" name="file_upload" type="file" multiple="true">
+                        <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
+                        <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
+                        {{--縮略圖(uploadify)匯入--}}
+                        <script type="text/javascript">
+                            <?php $timestamp = time();?>
+                            $(function() {
+                                $('#file_upload').uploadify({
+                                    'buttonText' : '圖片上傳',
+                                    'formData'     : {
+                                        'timestamp' : '<?php echo $timestamp;?>',
+                                        '_token'     : '{{csrf_token()}}'
+                                    },
+                                    'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
+                                    'uploader' : "{{url('admin/upload')}}"
+                                });
+                            });
+                        </script>
+                        {{--縮略圖(uploadify)的CSS修正--}}
+                        <style>
+                            .uploadify{display:inline-block;}
+                            .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
+                            table.add_tab tr td span.uploadify-button-text{color: #FFF; margin:0;}
+                        </style>
                     </td>
                 </tr>
                 <tr>
