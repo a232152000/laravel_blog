@@ -33,7 +33,7 @@
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('admin/category')}}" method="post">
+        <form action="{{url('admin/article')}}" method="post">
             {{csrf_field()}}
             <table class="add_tab">
                 <tbody>
@@ -54,7 +54,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th><i class="require">*</i>編輯:</th>
+                    <th>編輯:</th>
                     <td>
                         <input type="text" class="sm" name="art_editor">
                     </td>
@@ -70,23 +70,23 @@
                         {{--縮略圖(uploadify)匯入--}}
                         <script type="text/javascript">
                             <?php $timestamp = time();?>
-                            $(function() {
+                        $(function() {
                                 $('#file_upload').uploadify({
                                     'buttonText' : '圖片上傳',
                                     'formData'     : {
                                         'timestamp' : '<?php echo $timestamp;?>',
-                                        '_token'     : '{{csrf_token()}}'
+                                        '_token'     : "{{csrf_token()}}"
                                     },
                                     'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
                                     'uploader' : "{{url('admin/upload')}}",
                                     'onUploadSuccess' : function(file, data, response) {
                                         $('input[name=art_thumb]').val(data);
                                         $('#art_thumb_img').attr('src','/'+data);
+//                                    alert(data);
                                     }
                                 });
                             });
                         </script>
-                        {{--縮略圖(uploadify)的CSS修正--}}
                         <style>
                             .uploadify{display:inline-block;}
                             .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
@@ -97,7 +97,7 @@
                 <tr>
                     <th></th>
                     <td>
-                        <img src="" alt="" id="art_thumb_img" style="max-width: 350px ; max-height: 100px">
+                        <img src="" alt="" id="art_thumb_img" style="max-width: 350px; max-height:100px;">
                     </td>
                 </tr>
                 <tr>
@@ -113,7 +113,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>文章內容:</th>
+                    <th><i class="require">*</i>文章內容:</th>
                     <td>
                         {{--百度文章編輯器(Ueditor)加入--}}
                         <script type="text/javascript" charset="utf-8" src="{{asset('resources/org/ueditor/ueditor.config.js')}}"></script>
