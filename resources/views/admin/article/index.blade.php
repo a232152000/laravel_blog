@@ -45,7 +45,7 @@
                     <td>{{$v -> art_editor}}</td>
                     <td>{{date('Y-m-d' , $v -> art_time)}}</td>
                     <td>
-                        <a href="#">修改</a>
+                        <a href="{{url('admin/article/'.$v -> art_id.'/edit')}}">修改</a>
                         <a href="#">刪除</a>
                     </td>
                 </tr>
