@@ -73,4 +73,23 @@ class ArticleController extends CommonController
             return back() -> with('errors','文章更新失敗，請稍後再試!');
         }
     }
+
+    //DELETE admin/article/{category}  刪除單個分類
+    public function destroy($art_id)
+    {
+        $re = Article::where('art_id',$art_id)->delete();
+        if($re){
+            $data = [
+                'status' => 0,
+                'msg' => '文章刪除成功',
+            ];
+        }
+        else{
+            $data = [
+                'status' => 1,
+                'msg' => '文章刪除失敗，請稍後再試',
+            ];
+        }
+        return $data;
+    }
 }

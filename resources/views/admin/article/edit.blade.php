@@ -26,7 +26,7 @@
         <div class="result_content">
             <div class="short_wrap">
                 <a href="{{url('admin/article/create')}}"><i class="fa fa-plus"></i>添加文章</a>
-                <a href="{{url('admin/article')}}"><i class="fa fa-recycle"></i>全部文章</a>
+                <a href="{{url('admin/article')}}"><i class="fa fa-recycle"></i>文章列表</a>
             </div>
         </div>
     </div>
