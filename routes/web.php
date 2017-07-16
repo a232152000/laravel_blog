@@ -33,5 +33,10 @@ Route::group(['middleware' => ['web','admin.login'] , 'prefix' => 'admin' , 'nam
     Route::resource('category', 'CategoryController');//文章分類頁面
 
     Route::resource('article', 'ArticleController');//文章頁面
+
+    Route::resource('links', 'LinksController');//友情鏈結頁面
+    Route::post('links/changeorder', 'LinksController@changeOrder');//友情鏈結頁面更改排序
+
+
     Route::any('upload', 'CommonController@upload');//文章頁面上傳文件
 });

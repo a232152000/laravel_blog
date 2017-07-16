@@ -17,6 +17,7 @@ class CategoryController extends CommonController
         return view('admin.category.index') -> with('data' , $category);
     }
 
+    //更改order的排序
     public function changeOrder()
     {
         $input = Input::all();
@@ -70,7 +71,6 @@ class CategoryController extends CommonController
                 return back() -> withErrors($validator);
             }
         }
-
     }
 
     //get admin/category/{category}/edit  編輯分類
