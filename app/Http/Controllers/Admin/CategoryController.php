@@ -71,6 +71,7 @@ class CategoryController extends CommonController
                 return back() -> withErrors($validator);
             }
         }
+
     }
 
     //get admin/category/{category}/edit  編輯分類

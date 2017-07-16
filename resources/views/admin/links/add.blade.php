@@ -25,8 +25,8 @@
         </div>
         <div class="result_content">
             <div class="short_wrap">
-                <a href="{{url('admin/links/create')}}"><i class="fa fa-plus"></i>添加分類</a>
-                <a href="{{url('admin/links')}}"><i class="fa fa-recycle"></i>全部分類</a>
+                <a href="{{url('admin/links/create')}}"><i class="fa fa-plus"></i>添加友情鏈結</a>
+                <a href="{{url('admin/links')}}"><i class="fa fa-recycle"></i>全部友情鏈結</a>
             </div>
         </div>
     </div>

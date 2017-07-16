@@ -76,6 +76,44 @@ class LinksController extends Controller
         }
     }
 
+    //get admin/links/{category}/edit  編輯友情鏈結
+    public function edit($link_id)
+    {
+        $field = Links::find($link_id);
+        return view('admin/links/edit' , compact('field'));
+    }
+
+    //put admin/links/{category} 更新友情鏈結
+    public function update($link_id)
+    {
+        $input = Input::except('_token','_method');
+        $re = Links::where('link_id' , $link_id) ->update($input);
+        if($re){
+            return redirect('admin/links');
+        }
+        else{
+            return back() -> with('errors','友情鏈結修改失敗，請稍後再試!');
+        }
+    }
+
+    //DELETE admin/category/{category}  刪除友情鏈結
+    public function destroy($link_id)
+    {
+        $re = Links::where('link_id',$link_id)->delete();
+        if($re){
+            $data = [
+                'status' => 0,
+                'msg' => '友情鏈結刪除成功',
+            ];
+        }
+        else{
+            $data = [
+                'status' => 1,
+                'msg' => '友情鏈結刪除失敗，請稍後再試',
+            ];
+        }
+        return $data;
+    }
 
     //get admin/links/{category} 顯示單個友情鏈結訊息
     public function show()

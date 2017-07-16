@@ -38,8 +38,8 @@
         <!--快捷导航 开始-->
         <div class="result_content">
             <div class="short_wrap">
-                <a href="{{url('admin/links/create')}}"><i class="fa fa-plus"></i>添加分類</a>
-                <a href="{{url('admin/links')}}"><i class="fa fa-recycle"></i>全部分類</a>
+                <a href="{{url('admin/links/create')}}"><i class="fa fa-plus"></i>添加友情鏈結</a>
+                <a href="{{url('admin/links')}}"><i class="fa fa-recycle"></i>全部友情鏈結</a>
             </div>
         </div>
         <!--快捷导航 结束-->
@@ -68,7 +68,7 @@
                     <td>{{$v -> link_title}}</td>
                     <td>{{$v -> link_url}}</td>
                     <td>
-                        <a href="{{url('admin/category/'.$v -> link_id.'/edit')}}">修改</a>
+                        <a href="{{url('admin/links/'.$v -> link_id.'/edit')}}">修改</a>
                         <a href="javascript:" onclick="delCate({{$v -> link_id}})">刪除</a>
                     </td>
                 </tr>
@@ -90,13 +90,13 @@
            });
         }
 
-        //刪除分類提示框
-        function delCate(cate_id) {
+        //刪除友情鏈結提示框
+        function delCate(link_id) {
             //询问框
-            layer.confirm('您確定要刪除此分類？', {
+            layer.confirm('您確定要刪除此友情鏈結？', {
                 btn: ['確定','取消'] //按钮
             }, function(){
-                $.post("{{url('admin/category/')}}/"+cate_id , {'_method':'delete' , '_token':"{{csrf_token()}}" },function (data) {
+                $.post("{{url('admin/links/')}}/"+link_id , {'_method':'delete' , '_token':"{{csrf_token()}}" },function (data) {
                 if(data.status == 0){
                     layer.msg(data.msg, {icon: 6});
                     location.href = location.href;
