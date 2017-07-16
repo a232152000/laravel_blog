@@ -17,7 +17,6 @@ class CategoryController extends CommonController
         return view('admin.category.index') -> with('data' , $category);
     }
 
-    //更改order的排序
     public function changeOrder()
     {
         $input = Input::all();
