@@ -36,8 +36,9 @@
 					<li>
 						<h3><i class="fa fa-fw fa-cog"></i>系統設置</h3>
 							<ul class="sub_menu" style="display: block">
-									<li><a href="{{url('admin/links')}}" target="main"><i class="fa fa-fw fa-cubes"></i>友情鏈結</a></li>
-									<li><a href="#" target="main"><i class="fa fa-fw fa-database"></i>備份還原</a></li>
+								<li><a href="{{url('admin/links')}}" target="main"><i class="fa fa-fw fa-cubes"></i>友情鏈結</a></li>
+								<li><a href="{{url('admin/navs')}}" target="main"><i class="fa fa-navicon"></i>自定義導航</a></li>
+								<li><a href="#" target="main"><i class="fa fa-fw fa-database"></i>備份還原</a></li>
 							</ul>
 					</li>
 					<li>
