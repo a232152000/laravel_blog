@@ -13,7 +13,6 @@ class ConfigController extends Controller
     //get admin/config 全部配置項列表
     public function index()
     {
-        dd('全部配置項列表');
         $data = Config::orderBy('conf_order' , 'asc') -> get();
        return view('admin.config.index' , compact('data'));
     }
@@ -54,11 +53,11 @@ class ConfigController extends Controller
 
         $rules = [
             'conf_name' => 'required',
-            'conf_url' => 'required',
+            'conf_title' => 'required',
         ];
         $message = [
             'conf_name.required' => '配置項名稱不能為空!',
-            'conf_url.required' => '配置項URL名稱不能為空!',
+            'conf_title.required' => '配置項標題名稱不能為空!',
         ];
 
         $validator = Validator::make($input,$rules,$message);
