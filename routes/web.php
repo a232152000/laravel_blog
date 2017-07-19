@@ -38,6 +38,7 @@ Route::group(['middleware' => ['web','admin.login'] , 'prefix' => 'admin' , 'nam
     Route::post('links/changeorder', 'LinksController@changeOrder');//友情鏈結頁面更改排序
     Route::resource('navs', 'NavsController');//自定義導航模板
     Route::post('navs/changeorder', 'NavsController@changeOrder');//友情鏈結頁面更改排序
+    Route::resource('config', 'ConfigController');//自定義導航模板
 
 
     Route::any('upload', 'CommonController@upload');//文章頁面上傳文件
