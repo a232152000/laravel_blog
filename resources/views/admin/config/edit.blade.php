@@ -3,14 +3,14 @@
     <!--面包屑导航 开始-->
     <div class="crumb_warp">
         <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-        <i class="fa fa-home"></i> <a href={{url('admin/info')}}>首頁</a> &raquo;  自定義導航管理
+        <i class="fa fa-home"></i> <a href={{url('admin/info')}}>首頁</a> &raquo;  配置項管理
     </div>
     <!--面包屑导航 结束-->
 
     <!--结果集标题与导航组件 开始-->
     <div class="result_wrap">
         <div class="result_title">
-            <h3>編輯自定義導航</h3>
+            <h3>修改配置項</h3>
             @if(count($errors)>0)
                 <div class="mark">
                     @if(is_object($errors))
@@ -25,40 +25,60 @@
         </div>
         <div class="result_content">
             <div class="short_wrap">
-                <a href="{{url('admin/navs/create')}}"><i class="fa fa-plus"></i>添加導航</a>
-                <a href="{{url('admin/navs')}}"><i class="fa fa-recycle"></i>全部導航</a>
+                <a href="{{url('admin/config/create')}}"><i class="fa fa-plus"></i>添加配置項</a>
+                <a href="{{url('admin/config')}}"><i class="fa fa-recycle"></i>全部配置項</a>
             </div>
         </div>
     </div>
     <!--结果集标题与导航组件 结束-->
 
     <div class="result_wrap">
-        <form action="{{url('admin/navs/'.$field -> nav_id)}}" method="post">
+        <form action="{{url('admin/config/'.$field -> conf_id)}}" method="post">
             {{method_field('PUT')}}
             {{csrf_field()}}
             <table class="add_tab">
                 <tbody>
                 <tr>
-                    <th><i class="require">*</i>導航名稱:</th>
+                    <th><i class="require">*</i>標題:</th>
                     <td>
-                        <input type="text" name="nav_name" value="{{$field -> nav_name}}">
-                        <input type="text" name="nav_alias" class="sm" value="{{$field -> nav_alias}}">
-                        <span><i class="fa fa-exclamation-circle yellow"></i>導航名稱必須填寫</span>
+                        <input type="text" name="conf_title" value="{{$field -> conf_title}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>配置項標題必須填寫</span>
                     </td>
                 </tr>
                 <tr>
-                    <th><i class="require">*</i>URL:</th>
+                    <th><i class="require">*</i>名稱:</th>
                     <td>
-                        <input type="text" class="lg" name="nav_url" value="{{$field -> nav_url}}">
+                        <input type="text" name="conf_name" value="{{$field -> conf_name}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>配置項名稱必須填寫</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>類型:</th>
+                    <td>
+                        <input type="radio" name="field_type" value="input" @if($field ->field_type=='input') checked @endif onclick="showTr()">input　
+                        <input type="radio" name="field_type" value="textarea" @if($field ->field_type=='textarea') checked @endif onclick="showTr()">textarea　
+                        <input type="radio" name="field_type" value="radio" @if($field ->field_type=='radio') checked @endif onclick="showTr()">radio
+                    </td>
+                </tr>
+                <tr class="field_value">
+                    <th>類型值:</th>
+                    <td>
+                        <input type="text" class="lg" name="field_value" value="{{$field -> field_value}}">
+                        <span><i class="fa fa-exclamation-circle yellow"></i>類型值只有在radio的情況下才需要配置，1|開啟，0|關閉</span>
                     </td>
                 </tr>
                 <tr>
                     <th>排序:</th>
                     <td>
-                        <input type="text" class="sm" name="nav_order" value="{{$field -> nav_order}}">
+                        <input type="text" class="sm" name="conf_order" value="{{$field -> conf_order}}">
                     </td>
                 </tr>
-
+                <tr>
+                    <th>說明:</th>
+                    <td>
+                        <textarea id="" cols="30" rows="10"  name="conf_tips">{{$field -> conf_tips}}</textarea>
+                    </td>
+                </tr>
                 <tr>
                     <th></th>
                     <td>
@@ -70,4 +90,17 @@
             </table>
         </form>
     </div>
+
+    <script>
+        showTr();
+        function showTr() {
+            var type = $('input[name = field_type]:checked').val();
+            if(type == 'radio'){
+                $('.field_value').show();
+            }
+            else{
+                $('.field_value').hide();
+            }
+        }
+    </script>
 @endsection
