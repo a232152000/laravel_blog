@@ -3,7 +3,7 @@
 <!--面包屑导航 开始-->
 <div class="crumb_warp">
     <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-    <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首頁</a> &raquo; 自定義導航管理
+    <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首頁</a> &raquo; 配置項管理
 </div>
 <!--面包屑导航 结束-->
 
@@ -33,13 +33,13 @@
 <form action="#" method="post">
     <div class="result_wrap">
         <div class="result_title">
-            <h3>自定義導航列表</h3>
+            <h3>配置項列表</h3>
         </div>
         <!--快捷导航 开始-->
         <div class="result_content">
             <div class="short_wrap">
-                <a href="{{url('admin/navs/create')}}"><i class="fa fa-plus"></i>添加導航</a>
-                <a href="{{url('admin/navs')}}"><i class="fa fa-recycle"></i>全部導航</a>
+                <a href="{{url('admin/config/create')}}"><i class="fa fa-plus"></i>添加配置項</a>
+                <a href="{{url('admin/config')}}"><i class="fa fa-recycle"></i>全部配置項</a>
             </div>
         </div>
         <!--快捷导航 结束-->
@@ -51,25 +51,25 @@
                 <tr>
                     <th class="tc" width="5%">排序</th>
                     <th class="tc" width="5%">ID</th>
-                    <th>導航名稱</th>
-                    <th>導航別名</th>
-                    <th>導航超連結</th>
+                    <th>標題</th>
+                    <th>名稱</th>
+                    <th></th>
                     <th>操作</th>
                 </tr>
                 @foreach($data as $v)
                 <tr>
                     <td class="tc">
-                        <input type="text" onchange="changeOrder(this,{{$v -> nav_id}})" value="{{$v -> nav_order}}">
+                        <input type="text" onchange="changeOrder(this,{{$v -> conf_id}})" value="{{$v -> conf_order}}">
                     </td>
-                    <td class="tc">{{$v -> nav_id}}</td>
+                    <td class="tc">{{$v -> conf_id}}</td>
                     <td>
-                        <a href="#">{{$v -> nav_name}}</a>
+                        <a href="#">{{$v -> conf_title}}</a>
                     </td>
-                    <td>{{$v -> nav_alias}}</td>
-                    <td>{{$v -> nav_url}}</td>
+                    <td>{{$v -> conf_name}}</td>
+                    <td></td>
                     <td>
-                        <a href="{{url('admin/navs/'.$v -> nav_id.'/edit')}}">修改</a>
-                        <a href="javascript:" onclick="delCate({{$v -> nav_id}})">刪除</a>
+                        <a href="{{url('admin/config/'.$v -> conf_id.'/edit')}}">修改</a>
+                        <a href="javascript:" onclick="delCate({{$v -> conf_id}})">刪除</a>
                     </td>
                 </tr>
                 @endforeach
@@ -80,9 +80,9 @@
 <!--搜索结果页面 列表 结束-->
 
     <script>
-        function changeOrder(obj,nav_id){
-            var nav_order = $(obj).val();
-           $.post("{{url('admin/navs/changeorder')}}" , {'_token':'{{csrf_token()}}' , 'nav_id':nav_id , 'nav_order':nav_order}, function (data) {
+        function changeOrder(obj,conf_id){
+            var conf_order = $(obj).val();
+           $.post("{{url('admin/config/changeorder')}}" , {'_token':'{{csrf_token()}}' , 'conf_id':conf_id , 'conf_order':conf_order}, function (data) {
                if(data.status==0)
                    layer.msg(data.msg, {icon: 6});
                else
@@ -90,13 +90,13 @@
            });
         }
 
-        //刪除自定義導航提示框
-        function delCate(nav_id) {
+        //刪除配置項提示框
+        function delCate(conf_id) {
             //询问框
-            layer.confirm('您確定要刪除此自定義導航？', {
+            layer.confirm('您確定要刪除此配置項？', {
                 btn: ['確定','取消'] //按钮
             }, function(){
-                $.post("{{url('admin/navs/')}}/"+nav_id , {'_method':'delete' , '_token':"{{csrf_token()}}" },function (data) {
+                $.post("{{url('admin/config/')}}/"+conf_id , {'_method':'delete' , '_token':"{{csrf_token()}}" },function (data) {
                 if(data.status == 0){
                     layer.msg(data.msg, {icon: 6});
                     location.href = location.href;
