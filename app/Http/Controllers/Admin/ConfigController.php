@@ -18,11 +18,11 @@ class ConfigController extends Controller
         foreach($data as $k => $v){
             switch ($v -> field_type){
                 case 'input':
-                    $data[$k] -> _html = '<input type="text" name="conf_content" class="lg"  value="'.$v->conf_content.'">';
+                    $data[$k] -> _html = '<input type="text" name="conf_content[]" class="lg"  value="'.$v->conf_content.'">';
                     break;
 
                 case 'textarea':
-                    $data[$k] -> _html = '<textarea type="text" name="conf_content" class="lg">'.$v->conf_content.'</textarea>';
+                    $data[$k] -> _html = '<textarea type="text" name="conf_content[]" class="lg">'.$v->conf_content.'</textarea>';
                     break;
 
                 case 'radio':
@@ -35,15 +35,23 @@ class ConfigController extends Controller
                         $r = explode('|' , $n);
 
                         $c =$v->conf_content==$r[0] ? ' checked ':'';
-                        $str .= '<input type="radio" name="conf_content" value="'.$r[0].'" '.$c.'>'.$r[1].'　';
-                        echo $str;
+                        $str .= '<input type="radio" name="conf_content[]" value="'.$r[0].'" '.$c.'>'.$r[1].'　';
                     }
                     $data[$k] -> _html = $str;
                     break;
             }
         }
-
        return view('admin.config.index' , compact('data'));
+    }
+
+    //配置項頁面之配置值修改
+    public function changeContent()
+    {
+        $input = Input::all();
+        foreach ($input['conf_id'] as $k => $v){
+            Config::where('conf_id' , $v) -> update(['conf_content' => $input['conf_content'][$k]]);
+        }
+        return back() -> with('errors','配置項更新成功!');
     }
 
     //更改order的排序

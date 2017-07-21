@@ -30,10 +30,20 @@
 {{--<!--结果页快捷搜索框 结束-->--}}
 
 <!--搜索结果页面 列表 开始-->
-<form action="#" method="post">
     <div class="result_wrap">
         <div class="result_title">
             <h3>配置項列表</h3>
+            @if(count($errors)>0)
+                <div class="mark">
+                    @if(is_object($errors))
+                        @foreach($errors -> all() as $error)
+                            <p>{{$error}}</p>
+                        @endforeach
+                    @else
+                        <p>{{$errors}}</p>
+                    @endif
+                </div>
+            @endif
         </div>
         <!--快捷导航 开始-->
         <div class="result_content">
@@ -47,36 +57,45 @@
 
     <div class="result_wrap">
         <div class="result_content">
-            <table class="list_tab">
-                <tr>
-                    <th class="tc" width="5%">排序</th>
-                    <th class="tc" width="5%">ID</th>
-                    <th>標題</th>
-                    <th>名稱</th>
-                    <th></th>
-                    <th>操作</th>
-                </tr>
-                @foreach($data as $v)
-                <tr>
-                    <td class="tc">
-                        <input type="text" onchange="changeOrder(this,{{$v -> conf_id}})" value="{{$v -> conf_order}}">
-                    </td>
-                    <td class="tc">{{$v -> conf_id}}</td>
-                    <td>
-                        <a href="#">{{$v -> conf_title}}</a>
-                    </td>
-                    <td>{{$v -> conf_name}}</td>
-                    <td>{!! $v -> _html !!}</td>
-                    <td>
-                        <a href="{{url('admin/config/'.$v -> conf_id.'/edit')}}">修改</a>
-                        <a href="javascript:" onclick="delCate({{$v -> conf_id}})">刪除</a>
-                    </td>
-                </tr>
-                @endforeach
-            </table>
+            <form action="{{url('admin/config/changecontent')}}" method="post">
+                {{csrf_field()}}
+                <table class="list_tab">
+                    <tr>
+                        <th class="tc" width="5%">排序</th>
+                        <th class="tc" width="5%">ID</th>
+                        <th>標題</th>
+                        <th>名稱</th>
+                        <th></th>
+                        <th>操作</th>
+                    </tr>
+                    @foreach($data as $v)
+                    <tr>
+                        <td class="tc">
+                            <input type="text" onchange="changeOrder(this,{{$v -> conf_id}})" value="{{$v -> conf_order}}">
+                        </td>
+                        <td class="tc">{{$v -> conf_id}}</td>
+                        <td>
+                            <a href="#">{{$v -> conf_title}}</a>
+                        </td>
+                        <td>{{$v -> conf_name}}</td>
+                        <td>
+                            <input type="hidden" name="conf_id[]" value="{{$v -> conf_id}}">
+                            {!! $v -> _html !!}
+                        </td>
+                        <td>
+                            <a href="{{url('admin/config/'.$v -> conf_id.'/edit')}}">修改</a>
+                            <a href="javascript:" onclick="delCate({{$v -> conf_id}})">刪除</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            <div class="btn_group">
+                <input type="submit" value="提交">
+                <input type="button" class="back" onclick="history.go(-1)" value="返回" >
+            </div>
+            </form>
         </div>
     </div>
-</form>
 <!--搜索结果页面 列表 结束-->
 
     <script>
