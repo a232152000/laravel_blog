@@ -66,7 +66,7 @@
                         <a href="#">{{$v -> conf_title}}</a>
                     </td>
                     <td>{{$v -> conf_name}}</td>
-                    <td></td>
+                    <td>{!! $v -> _html !!}</td>
                     <td>
                         <a href="{{url('admin/config/'.$v -> conf_id.'/edit')}}">修改</a>
                         <a href="javascript:" onclick="delCate({{$v -> conf_id}})">刪除</a>
