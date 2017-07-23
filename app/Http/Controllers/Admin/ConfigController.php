@@ -51,7 +51,16 @@ class ConfigController extends Controller
         foreach ($input['conf_id'] as $k => $v){
             Config::where('conf_id' , $v) -> update(['conf_content' => $input['conf_content'][$k]]);
         }
+        $this -> putFile();
         return back() -> with('errors','配置項更新成功!');
+    }
+
+    public function putFile()
+    {
+        $config = Config::pluck('conf_content' , 'conf_name') -> all();
+        $path = base_path().'\config\web.php';
+        $str = '<?php return '.var_export($config , true). ';';
+        file_put_contents($path,$str);
     }
 
     //更改order的排序
@@ -126,6 +135,7 @@ class ConfigController extends Controller
         $input = Input::except('_token','_method');
         $re = Config::where('conf_id' , $conf_id) ->update($input);
         if($re){
+            $this -> putFile();
             return redirect('admin/config');
         }
         else{
@@ -138,6 +148,7 @@ class ConfigController extends Controller
     {
         $re = Config::where('conf_id',$conf_id)->delete();
         if($re){
+            $this -> putFile();
             $data = [
                 'status' => 0,
                 'msg' => '配置項刪除成功',
