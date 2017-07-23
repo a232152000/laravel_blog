@@ -6,13 +6,13 @@
 	<div class="top_left">
 		<div class="logo">後台管理模板</div>
 		<ul>
-			<li><a href="#" class="active">首頁</a></li>
-			<li><a href="#">管理頁</a></li>
+			<li><a href="{{url('/')}}" target="_blank" class="active">首頁</a></li>
+			<li><a href="{{url('admin/info')}}" target="main">管理頁</a></li>
 		</ul>
 	</div>
 	<div class="top_right">
 		<ul>
-			<li>管理员：admin</li>
+			<li>管理員：admin</li>
 			<li><a href="{{url('admin/pass')}}" target="main">修改密碼</a></li>
 			<li><a href="{{url('admin/quit')}}">退出</a></li>
 		</ul>
@@ -24,7 +24,7 @@
 <div class="menu_box">
 	<ul>
 			<li>
-				<h3><i class="fa fa-fw fa-clipboard"></i>常用操作</h3>
+				<h3><i class="fa fa-fw fa-clipboard"></i>內容管理</h3>
 					<ul class="sub_menu">
 						<li><a href="{{url('admin/category/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分頁</a></li>
 						<li><a href="{{url('admin/category')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分頁列表</a></li>
