@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\View;
 
 class CommonController extends Controller
 {
+    //先加載自定義導航到所有視圖頁面
     public function __construct()
     {
         $navs = Navs::all();
