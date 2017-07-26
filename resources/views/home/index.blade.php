@@ -1,22 +1,10 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
+@extends('layouts.home')
+@section('info')
     <title>個人Blog</title>
     <meta name="keywords" content="個人Blog模板,Blog模板" />
     <meta name="description" content="尋夢主題的個人Blog模板，優雅、穩重、大氣,低調。" />
-    <link href="{{asset('resources/views/home/css/base.css')}}" rel="stylesheet">
-    <link href="{{asset('resources/views/home/css/index.css')}}" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="{{asset('resources/views/home/js/modernizr.js')}}"></script>
-    <![endif]-->
-</head>
-<body>
-<header>
-    <div id="logo"><a href="/"></a></div>
-    <nav class="topnav" id="topnav"><a href="index.html"><span>首頁</span><span class="en">Protal</span></a><a href="about.html"><span>關於我</span><span class="en">About</span></a><a href="newlist.html"><span>慢生活</span><span class="en">Life</span></a><a href="moodlist.html"><span>碎言碎語</span><span class="en">Doing</span></a><a href="share.html"><span>模板分享</span><span class="en">Share</span></a><a href="knowledge.html"><span>學無止境</span><span class="en">Learn</span></a><a href="book.html"><span>留言板</span><span class="en">Gustbook</span></a></nav>
-    </nav>
-</header>
+    @endsection
+@section('content')
 <div class="banner">
     <section class="box">
         <ul class="texts">
@@ -127,9 +115,5 @@
         <!-- Baidu Button END -->
     </aside>
 </article>
-<footer>
-    <p>Design by 後盾網 <a href="http://www.miitbeian.gov.cn/" target="_blank">http://www.houdunwang.com</a> <a href="/">網站統計</a></p>
-</footer>
-<script src="{{asset('resources/views/home/js/silder.js')}}"></script>
-</body>
-</html>
+
+@endsection
