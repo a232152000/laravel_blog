@@ -1,54 +1,27 @@
 @extends('layouts.home')
 @section('info')
-    <title>個人Blog</title>
-    <meta name="keywords" content="個人Blog模板,Blog模板" />
-    <meta name="description" content="尋夢主題的個人Blog模板，優雅、穩重、大氣,低調。" />
+    <title>{{$field -> cate_name}} - {{Config::get('web.web_title')}}</title>
+    <meta name="keywords" content="{{$field -> cate_keywords}}" />
+    <meta name="description" content="{{$field -> cate_description}}" />
     @endsection
 @section('content')
 <article class="blogs">
-    <h1 class="t_nav"><span> "慢生活" 不是懶惰，放慢速度不是拖延時間，而是讓我們在生活中尋找平衡。</span><a href="/" class="n1">網站首頁</a><a href="/" class="n2">慢生活</a></h1>
+    <h1 class="t_nav"><span> {{$field -> cate_title}} </span><a href="{{url('/')}}" class="n1">網站首頁</a><a href="{{url('cate/'.$field -> cate_id)}}" class="n2">{{$field -> cate_name}}</a></h1>
     <div class="newblog left">
-        <h2>程序员请放下你的技术情节，与你的同伴一起进步</h2>
-        <p class="dateview"><span>发布时间：2013-11-04</span><span>作者：后盾</span><span>分类：[<a href="/news/life/">程序人生</a>]</span></p>
-        <figure><img src="images/001.png"></figure>
+
+        @foreach($data as $d)
+        <h2>{{$d -> art_title}}</h2>
+        <p class="dateview"><span>发布时间：{{date('Y-m-d' , $d -> art_time)}}</span><span>作者：{{$d -> art_editor}}</span><span>分类：[<a href="{{url('cate/'.$field -> cate_id)}}">{{$field -> cate_name}}</a>]</span></p>
+        <figure><img src="{{url($d -> art_thumb)}}"></figure>
         <ul class="nlist">
-            <p>如果说掌握一门赖以生计的技术是技术人员要学会的第一课的话， 那么我觉得技术人员要真正学会的第二课，不是技术，而是业务、交流与协作，学会关心其他工作伙伴的工作情况和进展...</p>
-            <a title="/" href="/" target="_blank" class="readmore">閱讀全文>></a>
+            <p>{{$d -> art_description}}</p>
+            <a title="{{$d -> art_title}}" href="{{url('a/'.$d -> art_id)}}" target="_blank" class="readmore">閱讀全文>></a>
         </ul>
         <div class="line"></div>
-        <h2>程序员请放下你的技术情节，与你的同伴一起进步</h2>
-        <p class="dateview"><span>发布时间：2013-11-04</span><span>作者：后盾</span><span>分类：[<a href="/news/life/">程序人生</a>]</span></p>
-        <figure><img src="images/001.png"></figure>
-        <ul class="nlist">
-            <p>如果说掌握一门赖以生计的技术是技术人员要学会的第一课的话， 那么我觉得技术人员要真正学会的第二课，不是技术，而是业务、交流与协作，学会关心其他工作伙伴的工作情况和进展...</p>
-            <a title="/" href="/" target="_blank" class="readmore">閱讀全文>></a>
-        </ul>
-        <div class="line"></div>
-        <h2>程序员请放下你的技术情节，与你的同伴一起进步</h2>
-        <p class="dateview"><span>发布时间：2013-11-04</span><span>作者：后盾</span><span>分类：[<a href="/news/life/">程序人生</a>]</span></p>
-        <figure><img src="images/001.png"></figure>
-        <ul class="nlist">
-            <p>如果说掌握一门赖以生计的技术是技术人员要学会的第一课的话， 那么我觉得技术人员要真正学会的第二课，不是技术，而是业务、交流与协作，学会关心其他工作伙伴的工作情况和进展...</p>
-            <a title="/" href="/" target="_blank" class="readmore">閱讀全文>></a>
-        </ul>
-        <div class="line"></div>
-        <h2>程序员请放下你的技术情节，与你的同伴一起进步</h2>
-        <p class="dateview"><span>发布时间：2013-11-04</span><span>作者：后盾</span><span>分类：[<a href="/news/life/">程序人生</a>]</span></p>
-        <figure><img src="images/001.png"></figure>
-        <ul class="nlist">
-            <p>如果说掌握一门赖以生计的技术是技术人员要学会的第一课的话， 那么我觉得技术人员要真正学会的第二课，不是技术，而是业务、交流与协作，学会关心其他工作伙伴的工作情况和进展...</p>
-            <a title="/" href="/" target="_blank" class="readmore">閱讀全文>></a>
-        </ul>
-        <div class="line"></div>
-        <div class="blank"></div>
-        <div class="ad">
-            <img src="images/ad.png">
-        </div>
+        @endforeach
+
         <div class="page">
-
-            <ul class="pagination"><li class="disabled"><span>«</span></li> <li class="active"><span>1</span></li><li><a href="http://blog.hd/admin/article?page=2">2</a></li> <li><a href="http://blog.hd/admin/article?page=2" rel="next">»</a></li></ul>
-
-
+            {{$data -> links()}}
         </div>
     </div>
     <aside class="right">
