@@ -24,7 +24,7 @@
 @yield('content')
 
 <footer>
-    <p>Design by 後盾網 <a href="http://www.miitbeian.gov.cn/" target="_blank">http://www.houdunwang.com</a> <a href="/">網站統計</a></p>
+    <p>{{Config::get('web.copyright')}} {!! Config::get('web.web_count') !!}</p>
 </footer>
 {{--自定義導航選取變色--}}
 {{--<script src="{{asset('resources/views/home/js/silder.js')}}"></script>--}}

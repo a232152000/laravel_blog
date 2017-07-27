@@ -11,8 +11,11 @@ class IndexController extends CommonController
 {
     public function index()
     {
+        //最高推薦的6篇文章
+        $pics = Article::orderBy('art_view' , 'desc') -> take(6) -> get();
+
         //點擊量最高的6篇文章
-        $hot = Article::orderBy('art_view' , 'desc') -> take(6) -> get();
+        $hot = Article::orderBy('art_view' , 'desc') -> take(5) -> get();
 
         //圖文列表5篇(帶分頁效果)
         $data = Article::orderBy('art_time' , 'desc') -> paginate(5);
@@ -24,7 +27,7 @@ class IndexController extends CommonController
         $links = Links::orderBy('link_order' , 'asc') -> get();
 
 
-        return view('home.index' , compact('hot' , 'data' , 'new' , 'links'));
+        return view('home.index' , compact('hot' , 'pics' ,'data' , 'new' , 'links'));
     }
 
     public function cate()
