@@ -16,7 +16,7 @@
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'Home\IndexController@index');//前台首頁
     Route::get('/cate/{cate_id}', 'Home\IndexController@cate');//前台分類頁面
-    Route::get('/art', 'Home\IndexController@article');//前台文章頁面
+    Route::get('/a/{art_id}', 'Home\IndexController@article');//前台文章頁面
 
     Route::any('admin/login', 'Admin\LoginController@login');//使用者後台登入頁面
     Route::get('admin/code', 'Admin\LoginController@code');//使用者後台登入頁面的隨機驗證碼
