@@ -15,28 +15,26 @@ class IndexController extends CommonController
         //最高推薦的6篇文章
         $pics = Article::orderBy('art_view' , 'desc') -> take(6) -> get();
 
-        //點擊量最高的6篇文章
-        $hot = Article::orderBy('art_view' , 'desc') -> take(5) -> get();
-
         //圖文列表5篇(帶分頁效果)
         $data = Article::orderBy('art_time' , 'desc') -> paginate(5);
-
-        //最新發布文章8篇
-        $new = Article::orderBy('art_time' , 'desc') -> take(8) -> get();
 
         //友情鏈接
         $links = Links::orderBy('link_order' , 'asc') -> get();
 
 
-        return view('home.index' , compact('hot' , 'pics' ,'data' , 'new' , 'links'));
+        return view('home.index' , compact('pics' ,'data' , 'links'));
     }
 
     public function cate($cate_id)
     {
         //圖文列表4篇(帶分頁效果)
         $data = Article::where('cate_id' , $cate_id) -> orderBy('art_time' , 'desc') -> paginate(4);
+
+        //當前分類的子分類
+        $submenu = Category::where('cate_pid' , $cate_id) ->get();
+
         $field = Category::find($cate_id);
-        return view('home.list' , compact('field' , 'data'));
+        return view('home.list' , compact('field' , 'data' , 'submenu'));
     }
 
     public function article()
