@@ -7,7 +7,12 @@
 @section('content')
 <article class="blogs">
     <link href="{{asset('resources/views/home/css/template.css')}}" rel="stylesheet">
-    <h1 class="t_nav"><span>您當前的位置：<a href="{{url('/')}}">首頁</a>&nbsp;&gt;&nbsp;<a href="{{url('cate/'.$field->cate_id)}}">{{$field -> cate_name}}</a></span><a href="{{url('/')}}" class="n1">網站首頁</a><a href="{{url('cate/'.$field->cate_id)}}" class="n2">{{$field -> cate_name}}</a></h1>
+    <style>
+        h1.t_nav1 span { float: right; color: #999; background:url(../images/5849.png) no-repeat left center; padding-left:20px }
+        h1.t_nav1 span a { margin: 0 5px }
+        h1.t_nav1 { border-bottom: #F1F1F1 1px solid; font-size: 12px; font-weight: normal; line-height: 40px; height: 40px; }
+    </style>
+    <h1 class="t_nav1"><span>您當前的位置：<a href="{{url('/')}}">首頁</a>&nbsp;&gt;&nbsp;<a href="{{url('cate/'.$field->cate_id)}}">{{$field -> cate_name}}</a></span><a href="{{url('/')}}" class="n1">網站首頁</a><a href="{{url('cate/'.$field->cate_id)}}" class="n2">{{$field -> cate_name}}</a></h1>
     <div class="index_about">
         <h2 class="c_titile">{{$field -> art_title}}</h2>
         <p class="box_c"><span class="d_time">发布时间：{{date('Y-m-d' , $field -> art_time)}}</span><span>编辑：{{$field -> art_editor}}</span><span>查看次数：{{$field -> art_view}}</span></p>
